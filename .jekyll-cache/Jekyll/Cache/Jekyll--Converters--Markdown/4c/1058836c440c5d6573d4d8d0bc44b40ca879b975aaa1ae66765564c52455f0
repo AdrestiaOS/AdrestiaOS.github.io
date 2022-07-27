@@ -1,6 +1,0 @@
-I"O<h1 id="字符串与字符"><strong>字符串与字符</strong></h1>
-<h2 id="ascii码"><strong>ASCII码</strong></h2>
-<p>再说存储方式前我们先看看ASCII码这个里面记录了英文常用的字符对应的BCD码,ASCII中的字符分为控制字符、通信字符跟显示字符共计127个,在计算机中存储他们需要7位的储空间，不过一般计算机中都是2的整数倍的字长所有用了8位的字长也就是8个bit位
-看一下ASCII的表格 <br />
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/USASCII_code_chart.png" width="100%" /></p>
-:ET
