@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    BCD码 - 日常学习记录
+    
+  </title>
+
+  <meta name="description" content="BCD码 BCD码的由来 二进码十进数（英语：Binary-Coded Decimal，简称BCD，中国大陆称BCD码或二-十进制编码）是一种十进制数字编码的形式。在这种编码下，每个十进制数字用一串单独的二进制比特来存储与表示。常见的有以4位表示1个十进制数字，称为压缩的BCD码（compressed or pa...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+  <link rel="stylesheet" href="/moros/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/moros/2022/07/27/bcd.html">
+  <link rel="alternate" type="application/rss+xml" title="日常学习记录" href="/moros/feed.xml">
+
+  
+
+  
+</head>
+
+
+<body>
+
+  <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/moros/">日常学习记录</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/moros/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/moros/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/moros/posts">Posts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/moros/contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <!-- Page Header -->
+
+  <header class="masthead">
+    
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>BCD码</h1>
+            
+            <h2 class="subheading">主要学习8241 5421 2421 余3码</h2>
+            
+            <span class="meta">Posted by
+              <a href="#">ZhaoYu Yang</a>
+              on July 27, 2022 &middot; <span class="reading-time" title="Estimated read time">
+  
+   1 min  read </span>
+
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+
+        <h1 id="bcd码"><strong>BCD码</strong></h1>
+<h2 id="bcd码的由来"><strong>BCD码的由来</strong></h2>
+<p>二进码十进数（英语：Binary-Coded Decimal，简称BCD，中国大陆称BCD码或二-十进制编码）是一种十进制数字编码的形式。在这种编码下，每个十进制数字用一串单独的二进制比特来存储与表示。常见的有以4位表示1个十进制数字，称为压缩的BCD码（compressed or packed）；或者以8位表示1个十进制数字，称为未压缩的BCD码（uncompressed or zoned）。<a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E9%80%B2%E7%A2%BC%E5%8D%81%E9%80%B2%E6%95%B8">维基百科</a></p>
+<h2 id="bcd码分类"><strong>BCD码分类</strong></h2>
+<ul>
+  <li>有权码 (8421码 2421码 5421码)
+    <ul>
+      <li>
+        <p><strong>8421码</strong>
+ 比较常用的码是8421码 2421比较少用这里先说一下8421码的使用，8421意味着4位组成一个BCD码每一位的权值分别为 8 4 2 1 这个东西能表达的十进制数字是 0 ～ 9 那么就有下表</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | 0000 | 0001 | 0010 | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 |
+</code></pre></div>        </div>
+
+        <p>每一个数都有对应的二进制数，就跟上表一样的，当有一个数字需要存储的时候，正常以人类的视角看到的比如说11换成机器数就是0001 0001但是如果是机器进行计算的话那么应该是 0010 + 1001 = 1011显然这个数值没有落在上表的区间里面，这时候我们就需要对这个数字进行改造 把刚才的数字加上一个十进制的6，也就是0110也就是 1011 + 0110 = 10001然后在补全8位也就是 0001 0001跟上面的数是一样的</p>
+      </li>
+      <li>
+        <p><strong>2421</strong>
+ 2421其实跟8421差不多的只不过第一位的权重变化了而已同样是4位能表现0～9的区间</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | 0000 | 0001 | 0010 | 0011 | 0100 | 1011 | 1100 | 1101 | 1110 | 1111 |
+</code></pre></div>        </div>
+
+        <p>这个的规律就是0～4都是0开头，5～9都是1开头也是比较好区分的计算方式跟8421码一样在区间内的直接写不计算后不在区间内的进行+6操作</p>
+      </li>
+    </ul>
+  </li>
+  <li>无权码 (余3码)
+    <ul>
+      <li>
+        <p><strong>余3码</strong>
+ 余3码是8421码的一种变种，其实就是用8421的码加伤0011生成出来的表格就是了</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 | 1011 | 1011 | 1100 |
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+        <hr>
+
+        <div class="clearfix">
+
+          
+          <a class="btn btn-primary float-left" href="/moros/2022/07/27/binary.html" data-toggle="tooltip" data-placement="top" title="R进制的使用">&larr; Previous<span class="d-none d-md-inline">
+              Post</span></a>
+          
+          
+          <a class="btn btn-primary float-right" href="/moros/2022/07/27/string.html" data-toggle="tooltip" data-placement="top" title="字符与字符串">Next<span class="d-none d-md-inline">
+              Post</span> &rarr;</a>
+          
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          <li class="list-inline-item">
+            <a href="mailto:yzy520418@gmail.com">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li class="list-inline-item">
+            <a href="https://twitter.com/ZhaoYu Yang">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/AdrestiaOS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; ZhaoYu Yang 2022</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/moros/assets/vendor/startbootstrap-clean-blog/js/scripts.js"></script>
+
+<script src="/moros/assets/scripts.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H7YE4S65WM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-H7YE4S65WM');
+</script>
+
+
+
+</body>
+
+</html>

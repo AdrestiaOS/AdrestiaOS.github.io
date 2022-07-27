@@ -1,0 +1,44 @@
+I"Q<h1 id="bcd码"><strong>BCD码</strong></h1>
+<h2 id="bcd码的由来"><strong>BCD码的由来</strong></h2>
+<p>二进码十进数（英语：Binary-Coded Decimal，简称BCD，中国大陆称BCD码或二-十进制编码）是一种十进制数字编码的形式。在这种编码下，每个十进制数字用一串单独的二进制比特来存储与表示。常见的有以4位表示1个十进制数字，称为压缩的BCD码（compressed or packed）；或者以8位表示1个十进制数字，称为未压缩的BCD码（uncompressed or zoned）。<a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E9%80%B2%E7%A2%BC%E5%8D%81%E9%80%B2%E6%95%B8">维基百科</a></p>
+<h2 id="bcd码分类"><strong>BCD码分类</strong></h2>
+<ul>
+  <li>有权码 (8421码 2421码 5421码)
+    <ul>
+      <li>
+        <p><strong>8421码</strong>
+ 比较常用的码是8421码 2421比较少用这里先说一下8421码的使用，8421意味着4位组成一个BCD码每一位的权值分别为 8 4 2 1 这个东西能表达的十进制数字是 0 ～ 9 那么就有下表</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | 0000 | 0001 | 0010 | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 |
+</code></pre></div>        </div>
+
+        <p>每一个数都有对应的二进制数，就跟上表一样的，当有一个数字需要存储的时候，正常以人类的视角看到的比如说11换成机器数就是0001 0001但是如果是机器进行计算的话那么应该是 0010 + 1001 = 1011显然这个数值没有落在上表的区间里面，这时候我们就需要对这个数字进行改造 把刚才的数字加上一个十进制的6，也就是0110也就是 1011 + 0110 = 10001然后在补全8位也就是 0001 0001跟上面的数是一样的</p>
+      </li>
+      <li>
+        <p><strong>2421</strong>
+ 2421其实跟8421差不多的只不过第一位的权重变化了而已同样是4位能表现0～9的区间</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | 0000 | 0001 | 0010 | 0011 | 0100 | 1011 | 1100 | 1101 | 1110 | 1111 |
+</code></pre></div>        </div>
+
+        <p>这个的规律就是0～4都是0开头，5～9都是1开头也是比较好区分的计算方式跟8421码一样在区间内的直接写不计算后不在区间内的进行+6操作</p>
+      </li>
+    </ul>
+  </li>
+  <li>无权码 (余3码)
+    <ul>
+      <li>
+        <p><strong>余3码</strong>
+ 余3码是8421码的一种变种，其实就是用8421的码加伤0011生成出来的表格就是了</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+ | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 | 1011 | 1011 | 1100 |
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

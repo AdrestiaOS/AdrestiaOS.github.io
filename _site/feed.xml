@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/moros/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/moros/" rel="alternate" type="text/html" /><updated>2022-07-27T17:34:26+08:00</updated><id>http://localhost:4000/moros/feed.xml</id><title type="html">日常学习记录</title><subtitle>主要用来记录做运维的学习过程</subtitle><author><name>ZhaoYu Yang</name></author><entry><title type="html">R进制的使用</title><link href="http://localhost:4000/moros/2022/07/27/binary.html" rel="alternate" type="text/html" title="R进制的使用" /><published>2022-07-27T04:33:33+08:00</published><updated>2022-07-27T04:33:33+08:00</updated><id>http://localhost:4000/moros/2022/07/27/binary</id><content type="html" xml:base="http://localhost:4000/moros/2022/07/27/binary.html"><![CDATA[<h1 id="r进制使用八进制十六进制二进制十进制">R进制使用(八进制，十六进制，二进制，十进制)</h1>
+<h2 id="常用进制来源"><strong>常用进制来源</strong></h2>
+<ul>
+  <li>
+    <p><strong>二进制（binary）</strong>  <a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E8%BF%9B%E5%88%B6">维基百科</a><br />
+  在数学和数字电路中指以2为底数的记数系统，以2为基数代表系统是二进位制的。这一系统中，<br />
+  通常用两个不同的数字0和1来表示。数字电子电路中，逻辑门直接采用了二进制，<br />
+  因此现代的计算机和依赖计算机的设备里都用到二进制。<br />
+  每个数字称为一个比特（二进制位）或比特（Bit，Binary digit 的缩写)。</p>
+  </li>
+  <li>
+    <p><strong>十进制 (decimal)</strong>  <a href="https://zh.wikipedia.org/wiki/%E5%8D%81%E8%BF%9B%E5%88%B6">维基百科</a><br />
+十进制是以10为底数的数字系统，是在世界上应用最广泛的进位制。</p>
+  </li>
+  <li>
+    <p><strong>八进制 (Octal)</strong>  <a href="https://zh.wikipedia.org/wiki/%E5%85%AB%E8%BF%9B%E5%88%B6">维基百科</a><br />
+八进制是以8为底的进位制</p>
+  </li>
+  <li>
+    <p><strong>十六进制 (hex)</strong>  <a href="https://zh.wikipedia.org/wiki/%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6">维基百科</a><br />
+在数学中是一种逢16进1的进位制</p>
+  </li>
+</ul>
+
+<h2 id="不同进制的取值范围"><strong>不同进制的取值范围</strong></h2>
+<ul>
+  <li><strong>r进制的取值区间</strong>
+进制的取值落在[0, r-1]的闭区间中, 比如八进制 (0 ～ 7)、再比如十六进制 (0 ～ 9 A B C D E F) (十六进制的前10位还是数字不过往后从 (10 ～ 15) 都变成了数字 、 二进制 (0 ～ 1)、十进制 (0 ～ 9) 其他的剩下的进制都是一样的原理
+    <h2 id="进制的通用表达式"><strong>进制的通用表达式</strong></h2>
+    <h3 id="r进制公式"><strong>R进制公式</strong></h3>
+
+\[\begin{align*}
+&amp; r^n *k_n + r^{n-1} *k_{n-1} + ... + r^1 * k_1 + r^0 * k_0 + r^{-1} * k_{-1}  + ... + r^{-m} * k_{-m} \
+\end{align*}\]
+  </li>
+  <li>r代表的是基数。</li>
+  <li>k代表的是位权。</li>
+</ul>
+
+<p>比如现在有一个二进制数 100.1 带入公式就是<br />
+    \(1 * 2^2 + 0 * 2^1 + 0 * 2^0 + 1 * 2^{-1}\)<br />
+换成10进制就是 251.5<br />
+    \(2 * 10^2 + 5 * 10^1 + 1 * 10^0 + 5* 10^{-1}\)<br />
+八进制跟十六进制同理就是换一下K值。</p>
+
+<h2 id="进制转换"><strong>进制转换</strong></h2>
+<h3 id="r进制转十进制"><strong>R进制转十进制</strong></h3>
+<p>二进制转化十进制是比较简单的，只要用上面的公式一套就成比如说 11011.101把这个数转化成十进制<br />
+  \(1 * 2^4  + 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 1 * 2^0 +  \\ 
+  1 * 2^{-1} + 0 * 2^{-2} + 1 * 2^{-3} = 27.625\) 
+  其他的进制转化到十进制的时候都可以进行这样的转化</p>
+<h3 id="二进制转八进制或者十六进制"><strong>二进制转八进制或者十六进制</strong></h3>
+<p>这个转换的方法也比较简单，二进制的每一位有$C_2^1$的可能性，八进制有8种可能性，所以就需要3位的二进制位才可以也就是$2^3$种
+  比如现在有一个二进制数 10001101.10011， 需要把这个数字转化成八进制先看整数部分为10001101 从右向左看，每三位换成一个八进制位<br />
+  \((101)_2 = (5)_8\)<br />
+  这样就完成了一位的转换剩下的转化依次如下<br />
+  \((001)_2 = (1)_8\)  \((100)_2 = (4)_8\)<br />
+  然后开始转换小数，小数是10011我们从左向右看<br />
+  \((100)_2 = (4)_8\)  <br />
+  前三位取完了后，后面的不够三位那么我们进行补全，11补全为110<br />
+  \((110)_2 = (6)_8\)<br />
+  整体转换完就是514.46<br />
+  十六进制的转换跟八进制的类似，不过因为十六进制有16种可能也就是说需要4位的bit位才能表示，剩下的就跟八进制的转化一样了</p>
+<h2 id="其他的进制转化为二进制"><strong>其他的进制转化为二进制</strong></h2>
+<h4 id="八进制十六进制转化为二进制"><strong>八进制、十六进制转化为二进制</strong></h4>
+<p>八进制跟十六进制其实跟上一个主题一样只不过是调换过来的方式，比如八进制其实就是一个8进制位换3个2进制位。十六进制位就是一个十六进制位换4个进制位</p>
+
+<h4 id="十进制转换r进制"><strong>十进制转换R进制</strong></h4>
+<ul>
+  <li><strong>标准方法(二进制为例)</strong>
+可以把一个二进制数看成整数部分跟小数部分，
+先开始计算整数部分，这个先拿一个例子来试验一下比如5.5， 整数部分为5，小数部分是0.5, 先计算整数部分那么就是先计算5的二进制数0,由R进制的公式可知。<br />
+\({r^n *k_n + ... + r^1 * k_1 + r^0 * k_0 \over r } = { r^{n-1} * k_n + ... + r^0 * k_1 \over r } + k_0\) <br />
+这样就可以求出来第0号的数然后在接着除以r来算出第一个值直到最后的商为0整个除法结束。<br />
+\({r^n *k_n + ... + r^1 * k_1 \over r } = { r^{n-1} * k_n + ... + k_2 * r^1  \over r } + k_1\)<br />
+看下面的图吧，第一个出来的是最低位然后依次增高所以整数5的二进制数就是 101<br />
+<img src="/moros/img/posts/binary/DTOB.jpeg" width="100%" /><br />
+开始计算小数部分，也是可以根据公式来搞<br />
+\(({ r^{-1} * k_{-1} + ... + r^{-m} * k_{-m} }) * r = k_{-1} + ... + k_{-m} * r^{-(m - 1)}\) <br />
+看下图是小数部分的计算<br />
+<img src="/moros/img/posts/binary/DTOB-a.jpeg" width="100%" /><br />
+整体计算出来的数值就是101.1，因为我这个比较简单，小数部分能够完整的出来，有一些无法完整转换比如下面的例子
+比如现在有一个是进制数是5.9 那么小数部分就是0.9，算出来就会有循环，所以只要保证取到需要的位数即可<br />
+<img src="/moros/img/posts/binary/DTOB-b.jpeg" width="100%" /></li>
+  <li>
+    <p><strong>特殊方法</strong><br />
+特殊的方法比较简单了只需要记住对应的权位的值就可以的到时候直接往里面套 我们以8位二进制整数跟3位二进制小数为例，比如：10000000.101</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center">\(2^7\)</th>
+          <th style="text-align: center">\(2^6\)</th>
+          <th style="text-align: center">\(2^5\)</th>
+          <th style="text-align: center">\(2^4\)</th>
+          <th style="text-align: center">\(2^3\)</th>
+          <th style="text-align: center">\(2^2\)</th>
+          <th style="text-align: center">\(2^1\)</th>
+          <th style="text-align: center">\(2^0\)</th>
+          <th style="text-align: center">\(2^{-1}\)</th>
+          <th style="text-align: center">\(2^{-2}\)</th>
+          <th style="text-align: center">\(2^{-3}\)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center">128</td>
+          <td style="text-align: center">64</td>
+          <td style="text-align: center">32</td>
+          <td style="text-align: center">16</td>
+          <td style="text-align: center">8</td>
+          <td style="text-align: center">4</td>
+          <td style="text-align: center">2</td>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">0.5</td>
+          <td style="text-align: center">0.25</td>
+          <td style="text-align: center">0.125</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>可以根据上面的表格来算出来对应的值然后相加即可每一位乘上对应的数值，也就是下面的方式来进行计算<br />
+\(1 * 2^7 + 0 * 2^6  + 0 * 2^5  + 0 * 2^4  + 0 * 2^3  + 0 * 2^2  + 0 * 2^1 + \\
+0 * 2^0 + 1 * 2^{-1} + 0 * 2^{-2} + 0 * 2^{-3}  = 128.625\)</p>
+  </li>
+</ul>
+
+<h2 id="真值与机器码"><strong>真值与机器码</strong></h2>
+<p>真值就是人类正常使用的数字有正负号的数 <code class="language-plaintext highlighter-rouge">-0,1001</code> 这就是一个二进制的真值 <code class="language-plaintext highlighter-rouge">-10</code> 这就是10进制的真值
+  机器数就是机器可以看懂的数字 正负号都会变成数字化，比如100001如果以无符号数看的话就是33</p>]]></content><author><name>ZhaoYu Yang</name></author><summary type="html"><![CDATA[R进制使用(八进制，十六进制，二进制，十进制) 常用进制来源 二进制（binary） 维基百科 在数学和数字电路中指以2为底数的记数系统，以2为基数代表系统是二进位制的。这一系统中， 通常用两个不同的数字0和1来表示。数字电子电路中，逻辑门直接采用了二进制， 因此现代的计算机和依赖计算机的设备里都用到二进制。 每个数字称为一个比特（二进制位）或比特（Bit，Binary digit 的缩写)。]]></summary></entry><entry><title type="html">BCD码</title><link href="http://localhost:4000/moros/2022/07/27/bcd.html" rel="alternate" type="text/html" title="BCD码" /><published>2022-07-27T04:33:33+08:00</published><updated>2022-07-27T04:33:33+08:00</updated><id>http://localhost:4000/moros/2022/07/27/bcd</id><content type="html" xml:base="http://localhost:4000/moros/2022/07/27/bcd.html"><![CDATA[<h1 id="bcd码"><strong>BCD码</strong></h1>
+<h2 id="bcd码的由来"><strong>BCD码的由来</strong></h2>
+<p>二进码十进数（英语：Binary-Coded Decimal，简称BCD，中国大陆称BCD码或二-十进制编码）是一种十进制数字编码的形式。在这种编码下，每个十进制数字用一串单独的二进制比特来存储与表示。常见的有以4位表示1个十进制数字，称为压缩的BCD码（compressed or packed）；或者以8位表示1个十进制数字，称为未压缩的BCD码（uncompressed or zoned）。<a href="https://zh.wikipedia.org/wiki/%E4%BA%8C%E9%80%B2%E7%A2%BC%E5%8D%81%E9%80%B2%E6%95%B8">维基百科</a></p>
+<h2 id="bcd码分类"><strong>BCD码分类</strong></h2>
+<ul>
+  <li>有权码 (8421码 2421码 5421码)
+    <ul>
+      <li>
+        <p><strong>8421码</strong>
+ 比较常用的码是8421码 2421比较少用这里先说一下8421码的使用，8421意味着4位组成一个BCD码每一位的权值分别为 8 4 2 1 这个东西能表达的十进制数字是 0 ～ 9 那么就有下表</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | 0000 | 0001 | 0010 | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 |
+</code></pre></div>        </div>
+
+        <p>每一个数都有对应的二进制数，就跟上表一样的，当有一个数字需要存储的时候，正常以人类的视角看到的比如说11换成机器数就是0001 0001但是如果是机器进行计算的话那么应该是 0010 + 1001 = 1011显然这个数值没有落在上表的区间里面，这时候我们就需要对这个数字进行改造 把刚才的数字加上一个十进制的6，也就是0110也就是 1011 + 0110 = 10001然后在补全8位也就是 0001 0001跟上面的数是一样的</p>
+      </li>
+      <li>
+        <p><strong>2421</strong>
+ 2421其实跟8421差不多的只不过第一位的权重变化了而已同样是4位能表现0～9的区间</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | 0000 | 0001 | 0010 | 0011 | 0100 | 1011 | 1100 | 1101 | 1110 | 1111 |
+</code></pre></div>        </div>
+
+        <p>这个的规律就是0～4都是0开头，5～9都是1开头也是比较好区分的计算方式跟8421码一样在区间内的直接写不计算后不在区间内的进行+6操作</p>
+      </li>
+    </ul>
+  </li>
+  <li>无权码 (余3码)
+    <ul>
+      <li>
+        <p><strong>余3码</strong>
+ 余3码是8421码的一种变种，其实就是用8421的码加伤0011生成出来的表格就是了</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> | 0    | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | 9    |
+ | 0011 | 0100 | 0101 | 0110 | 0111 | 1000 | 1001 | 1011 | 1011 | 1100 |
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>ZhaoYu Yang</name></author><summary type="html"><![CDATA[BCD码 BCD码的由来 二进码十进数（英语：Binary-Coded Decimal，简称BCD，中国大陆称BCD码或二-十进制编码）是一种十进制数字编码的形式。在这种编码下，每个十进制数字用一串单独的二进制比特来存储与表示。常见的有以4位表示1个十进制数字，称为压缩的BCD码（compressed or packed）；或者以8位表示1个十进制数字，称为未压缩的BCD码（uncompressed or zoned）。维基百科 BCD码分类 有权码 (8421码 2421码 5421码) 8421码 比较常用的码是8421码 2421比较少用这里先说一下8421码的使用，8421意味着4位组成一个BCD码每一位的权值分别为 8 4 2 1 这个东西能表达的十进制数字是 0 ～ 9 那么就有下表]]></summary></entry><entry><title type="html">字符与字符串</title><link href="http://localhost:4000/moros/2022/07/27/string.html" rel="alternate" type="text/html" title="字符与字符串" /><published>2022-07-27T04:33:33+08:00</published><updated>2022-07-27T04:33:33+08:00</updated><id>http://localhost:4000/moros/2022/07/27/string</id><content type="html" xml:base="http://localhost:4000/moros/2022/07/27/string.html"><![CDATA[<h1 id="字符串与字符"><strong>字符串与字符</strong></h1>
+<h2 id="ascii码"><strong>ASCII码</strong></h2>
+<p>再说存储方式前我们先看看ASCII码这个里面记录了英文常用的字符对应的BCD码,ASCII中的字符分为控制字符、通信字符跟显示字符共计127个,在计算机中存储他们需要7位的储空间，不过一般计算机中都是2的整数倍的字长所有用了8位的字长也就是8个bit位
+看一下ASCII的表格 <br />
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/USASCII_code_chart.png" width="100%" /></p>
+
+<p>来看一下这个表格可以印刷的字符从32~126,其余的都是控制字符跟通信字符
+数字是从48 ～ 57、大写字母是从65 ～ 90、小写字母是从97 ～ 122，可以计算一下其中的一个字符的BCD码，比如‘A’ 可以看表格对应的横纵坐标分别为100 0001 因为要是8位的二进制，所以就变成了0100 0001对应白噢中的就是(4,1)，其他的字符依次对应不同位置的BCD码。</p>
+<h2 id="英文字符在计算机中的存储"><strong>英文字符在计算机中的存储</strong></h2>
+<p>假如机器字长是8位，也就是8bit那么存储一个字符只需要这些就行只要在最高位补0就可以了，然后直接存在内存中就行</p>
+<h2 id="中文字符在计算机中的存储"><strong>中文字符在计算机中的存储</strong></h2>
+<p>中文的字符比较多所以要做适当的改造，汉字是用区位码来进行区分的并且使用了双字节编码的，区位码+20H = 国标码，因为中文的字符不能跟ASCII冲突所哟只能跳过ASCII的前32个字符所以进行了+20H,又因为需要进行存储在机器内部 所以还需要在+上80H使所有的汉字或者汉字字符都是1开头的二进制数，这也叫做汉字机内码,存储在计算机当中</p>
+<h2 id="字符串在计算机中的存储"><strong>字符串在计算机中的存储</strong></h2>
+<p>一个机器按照字节编址的话，那么存储一个英文字符只需要一个字节，也就是8bit，如果要存放的是中文字符的话
+因为是需要两个字节所以就有了大小端的存放方式</p>
+<ul>
+  <li>
+    <p><strong>大端存储</strong>
+计算机还是以字节编址，假如有一个二进制机器数00100101 01001001这个16位的数字想要存放在计算机的内存中，因为是字节编址每次只能存放一个字节但现在有两个字节了那么我们就要按照一定的规则来进行存放，大端只是其中的一种大端的规则是这个二进制机器数的高位存放在低地址处，而低位存放在高地址处那么整个数字的存放就变成00100101 01001001就变成了这样然后存放在计算机的内存中，如图从左到右地址依次增高</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  |     |     | 00100101 | 01001001 |     |     |     |
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>小端存储</strong>
+类似于大端存储小端的存储就是大端的反过来的低位放置在低地址处，高位放在高地址处</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  |     |     | 01001001 | 00100101 |     |     |     | 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>字符串的存储</strong>
+这里以C语言为例当我想要存储一个字符串的时候’abc’计算机就如下图的方式存储，如同我们刚才看到的那个ASCII表一样</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  | 61H | 62H | 63H | 00H |     |     |     |     |     |
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>c语言在存放字符串的时候需要在结尾处存放一个’\0’ 而’\0’对应的十六进制数就是00H</p>]]></content><author><name>ZhaoYu Yang</name></author><category term="Binary" /><summary type="html"><![CDATA[字符串与字符 ASCII码 再说存储方式前我们先看看ASCII码这个里面记录了英文常用的字符对应的BCD码,ASCII中的字符分为控制字符、通信字符跟显示字符共计127个,在计算机中存储他们需要7位的储空间，不过一般计算机中都是2的整数倍的字长所有用了8位的字长也就是8个bit位 看一下ASCII的表格]]></summary></entry><entry><title type="html">海明校验码与奇偶校验码</title><link href="http://localhost:4000/moros/2022/07/27/verify.html" rel="alternate" type="text/html" title="海明校验码与奇偶校验码" /><published>2022-07-27T04:33:33+08:00</published><updated>2022-07-27T04:33:33+08:00</updated><id>http://localhost:4000/moros/2022/07/27/verify</id><content type="html" xml:base="http://localhost:4000/moros/2022/07/27/verify.html"><![CDATA[<h1 id="奇偶校验跟海明校验">奇偶校验跟海明校验</h1>]]></content><author><name>ZhaoYu Yang</name></author><category term="Binary" /><summary type="html"><![CDATA[奇偶校验跟海明校验]]></summary></entry></feed>
